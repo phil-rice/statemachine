@@ -9,11 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+public interface IStateMachine<S, E> {
+    ResultOrError<S> transition(S state, E event);
+}
+
 @EqualsAndHashCode
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class StateMachine<S, E> {
+class StateMachine<S, E> implements IStateMachine<S, E>{
 
     final List<S> states;
     final Map<String, List<EventAndState<S, E>>> outputs;
